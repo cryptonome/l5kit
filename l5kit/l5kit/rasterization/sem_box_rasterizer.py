@@ -40,6 +40,7 @@ class SemBoxRasterizer(Rasterizer):
     ) -> np.ndarray:
         im_out_box = self.box_rast.rasterize(history_frames, history_agents, history_tl_faces, agent)
         im_out_sat = self.sat_rast.rasterize(history_frames, history_agents, history_tl_faces, agent)
+        im_out_sat=im_out_sat.reshape(im_out_box.shape[0],im_out_box.shape[1],-1)
         return np.concatenate([im_out_box, im_out_sat], -1)
 
     def to_rgb(self, in_im: np.ndarray, **kwargs: dict) -> np.ndarray:
