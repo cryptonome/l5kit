@@ -122,6 +122,8 @@ to train models that can recover from slight divergence from training set data
         agent_centroid = cur_frame["ego_translation"][:2]
         agent_yaw = rotation33_as_yaw(cur_frame["ego_rotation"])
         agent_extent = np.asarray((EGO_EXTENT_LENGTH, EGO_EXTENT_WIDTH, EGO_EXTENT_HEIGHT))
+        agent_velocity=None
+        agent_probabilities=None
         selected_agent = None
     else:
         # this will raise IndexError if the agent is not in the frame or under agent-threshold
@@ -135,6 +137,8 @@ to train models that can recover from slight divergence from training set data
         agent_centroid = agent["centroid"]
         agent_yaw = float(agent["yaw"])
         agent_extent = agent["extent"]
+        agent_velocity = agent["velocity"]
+        agent_probabilities =agent["label_probabilities"]
         selected_agent = agent
 
     input_im = (
@@ -172,6 +176,8 @@ to train models that can recover from slight divergence from training set data
         "centroid": agent_centroid,
         "yaw": agent_yaw,
         "extent": agent_extent,
+        "velocity": agent_velocity,
+        "label_probabilities":agent_probabilities,
     }
 
 
