@@ -10,10 +10,25 @@ from ..data import (
     get_tl_faces_slice_from_frames,
 )
 from ..data.filter import filter_agents_by_frames, filter_agents_by_track_id
-from ..geometry import angular_distance, rotation33_as_yaw, world_to_image_pixels_matrix
+from ..geometry import rotation33_as_yaw, world_to_image_pixels_matrix
 from ..kinematic import Perturbation
 from ..rasterization import EGO_EXTENT_HEIGHT, EGO_EXTENT_LENGTH, EGO_EXTENT_WIDTH, Rasterizer
 from .slicing import get_future_slice, get_history_slice
+
+def angular_distance(angle_a: float, angle_b: float) -> float:
+    """
+    Return the angular distance (angle_a - angle_b) between two angles in radians.
+    The results is always in the [-pi, pi] range
+
+    Args:
+        angle_a (float): first angle in radians
+        angle_b (float): second angle in radians
+
+    Returns:
+        angular distance in radians between two angles
+    """
+
+    return float((angle_a - angle_b + np.pi) % (2 * np.pi) - np.pi)
 
 
 def generate_agent_sample(
