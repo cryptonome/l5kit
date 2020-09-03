@@ -106,6 +106,8 @@ None if not desired
             "centroid": data["centroid"],
             "yaw": data["yaw"],
             "extent": data["extent"],
+            "velocity": data["velocity"],
+            "label_probabilties": data["label_probabilities"]
         }
 
     def __getitem__(self, index: int) -> dict:
